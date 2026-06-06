@@ -1,6 +1,19 @@
-<div class="p-8">
-    <h1 class="text-2xl font-bold">Danh sách công nợ của bạn</h1>
-    <table class="w-full mt-4">
-        </table>
-    <a href="checkout.html" class="bg-blue-600 text-white px-4 py-2 rounded">Thanh toán ngay</a>
-</div>
+<!DOCTYPE html>
+<html lang="vi">
+<head><meta charset="UTF-8"><title>Khách hàng</title><script src="https://cdn.tailwindcss.com"></script></head>
+<body class="bg-gray-50 p-8">
+    <h1 class="text-2xl font-bold">Danh sách nợ của bạn</h1>
+    <div id="customerList" class="mt-4"></div>
+    <a href="admin.html" class="text-xs text-gray-400">Trang Admin</a>
+
+    <script>
+        let debts = JSON.parse(localStorage.getItem('debts')) || [];
+        let html = debts.map(d => `
+            <div class="bg-white p-4 mb-2 shadow rounded flex justify-between">
+                <span>${d.name} - ${d.amount} VNĐ</span>
+                <a href="checkout.html?id=${d.id}" class="bg-green-600 text-white px-2 py-1 rounded">Thanh toán</a>
+            </div>`).join('');
+        document.getElementById('customerList').innerHTML = html;
+    </script>
+</body>
+</html>
